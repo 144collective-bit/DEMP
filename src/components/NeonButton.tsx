@@ -16,8 +16,8 @@ export function NeonButton({
 }: Props) {
   const sizing =
     size === "lg"
-      ? "min-h-[64px] px-8 sm:px-12 text-lg sm:text-2xl"
-      : "min-h-[48px] px-6 text-sm sm:text-base";
+      ? "min-h-14 px-8 text-base sm:min-h-16 sm:px-12 sm:text-xl"
+      : "min-h-12 px-6 text-sm sm:text-base";
 
   return (
     <Link href={href} className={`neon-btn ${sizing} ${className}`}>

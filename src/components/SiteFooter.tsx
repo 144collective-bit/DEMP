@@ -11,17 +11,17 @@ const NAV = [
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto border-t border-white/10 bg-black">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 py-8 sm:px-6">
+    <footer className="mt-auto border-t border-white/10 bg-black/90">
+      <div className="page-shell flex flex-col items-center gap-5 py-8 pb-[max(2rem,env(safe-area-inset-bottom))]">
         <nav
           aria-label="Footer"
-          className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs uppercase tracking-[0.14em] text-degen-cream/70"
+          className="flex flex-wrap items-center justify-center gap-x-1 gap-y-1"
         >
           {NAV.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="hover:text-degen-neon transition-colors"
+              className="inline-flex min-h-11 items-center px-3 text-xs uppercase tracking-[0.14em] text-degen-cream/70 transition-colors hover:text-degen-neon"
             >
               {item.label}
             </Link>
