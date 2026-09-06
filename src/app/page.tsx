@@ -35,7 +35,7 @@ export default function HomePage() {
     <main className="flex flex-1 flex-col">
       {/* HERO: one punch, CTA above fold */}
       <section className="relative flex min-h-[calc(100dvh-var(--header-h))] flex-col justify-center py-8 sm:py-10 lg:py-12">
-        <div className="page-shell grid items-center gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12 xl:gap-16">
+        <div className="page-shell grid items-center gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:gap-10 xl:gap-14">
           <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
             <p className="section-label mb-3 sm:mb-4">PulseChain first. Always.</p>
             <Image
@@ -44,7 +44,7 @@ export default function HomePage() {
               width={720}
               height={720}
               priority
-              className="h-auto w-full max-w-[240px] drop-shadow-[0_0_40px_rgba(0,229,255,0.15)] sm:max-w-[300px] lg:max-w-[360px]"
+              className="hero-logo h-auto w-full max-w-[min(100%,22rem)] drop-shadow-[0_0_48px_rgba(0,229,255,0.18)] sm:max-w-[min(100%,28rem)] lg:max-w-none"
             />
             <p className="mt-4 max-w-[28rem] text-sm leading-relaxed text-degen-cream/75 sm:mt-5 sm:text-[0.95rem]">
               Merch that punches. Tools that report the tape. No pitch decks.
@@ -58,8 +58,8 @@ export default function HomePage() {
           </div>
 
           <div className="relative mx-auto w-full max-w-[280px] sm:max-w-[320px] lg:mx-0 lg:max-w-[380px] lg:justify-self-end">
-            <div className="cream-panel overflow-hidden p-1.5 sm:p-2.5">
-              <div className="relative aspect-square overflow-hidden bg-[#6BBEE2]">
+            <div className="cream-panel overflow-hidden rounded-[14px] p-1.5 sm:p-2.5">
+              <div className="relative aspect-square overflow-hidden rounded-[10px] bg-[#6BBEE2]">
                 <Image
                   src="/mascot-degen.png"
                   alt="Degen mascot"
@@ -95,7 +95,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="cream-panel grid overflow-hidden md:grid-cols-2">
+          <div className="cream-panel grid overflow-hidden rounded-[14px] md:grid-cols-2">
             <div className="relative aspect-square bg-white md:aspect-auto md:min-h-[min(420px,50vw)]">
               <Image
                 src="/product-tee-fabric.jpg"
@@ -211,7 +211,7 @@ export default function HomePage() {
             <div className="mt-6">
               <Link
                 href="/blog"
-                className="inline-flex min-h-12 w-full items-center justify-center border-2 border-black bg-white px-5 py-3 text-xs font-bold uppercase tracking-[0.12em] text-black shadow-[3px_3px_0_#000] transition hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0_#000] sm:w-auto"
+                className="inline-flex min-h-12 w-full items-center justify-center rounded-full border-2 border-black bg-white px-6 py-3 text-xs font-bold uppercase tracking-[0.12em] text-black shadow-[0_4px_0_#000] transition hover:-translate-y-0.5 hover:shadow-[0_6px_0_#000] sm:w-auto"
               >
                 Peek the blog
               </Link>

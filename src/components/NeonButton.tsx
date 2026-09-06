@@ -16,12 +16,12 @@ export function NeonButton({
 }: Props) {
   const sizing =
     size === "lg"
-      ? "min-h-14 px-8 text-base sm:min-h-16 sm:px-12 sm:text-xl"
-      : "min-h-12 px-6 text-sm sm:text-base";
+      ? "min-h-14 px-9 text-base sm:min-h-[4.25rem] sm:px-14 sm:text-xl"
+      : "min-h-12 px-7 text-sm sm:px-8 sm:text-base";
 
   return (
     <Link href={href} className={`neon-btn ${sizing} ${className}`}>
-      {children}
+      <span className="relative z-[1]">{children}</span>
     </Link>
   );
 }
