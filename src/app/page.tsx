@@ -34,10 +34,10 @@ export default function HomePage() {
   return (
     <main className="flex flex-1 flex-col">
       {/* HERO: one punch, CTA above fold */}
-      <section className="relative flex min-h-[calc(100dvh-var(--header-h))] flex-col justify-center py-8 sm:py-10 lg:py-12">
-        <div className="page-shell grid items-center gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:gap-10 xl:gap-14">
+      <section className="relative flex min-h-[calc(100dvh-var(--header-h))] flex-col justify-start pt-4 pb-10 sm:pt-6 sm:pb-12 lg:pt-8 lg:pb-14">
+        <div className="page-shell grid items-start gap-5 sm:gap-7 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:gap-10 xl:gap-14">
           <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-            <p className="section-label mb-3 sm:mb-4">PulseChain first. Always.</p>
+            <p className="section-label mb-2 sm:mb-3">PulseChain first. Always.</p>
             <Image
               src="/logo-main.png"
               alt="The Degen Emporium"
@@ -46,11 +46,11 @@ export default function HomePage() {
               priority
               className="hero-logo h-auto w-full max-w-[min(100%,22rem)] drop-shadow-[0_0_48px_rgba(0,229,255,0.18)] sm:max-w-[min(100%,28rem)] lg:max-w-none"
             />
-            <p className="mt-4 max-w-[28rem] text-sm leading-relaxed text-degen-cream/75 sm:mt-5 sm:text-[0.95rem]">
+            <p className="mt-3 max-w-[28rem] text-sm leading-relaxed text-degen-cream/75 sm:mt-4 sm:text-[0.95rem]">
               Merch that punches. Tools that report the tape. No pitch decks.
               Just the shop and the chain.
             </p>
-            <div className="mt-6 w-full max-w-xs sm:mt-7 sm:max-w-none sm:w-auto">
+            <div className="mt-5 w-full max-w-xs sm:mt-6 sm:max-w-none sm:w-auto">
               <NeonButton href="/store" className="w-full sm:w-auto">
                 Enter store
               </NeonButton>
