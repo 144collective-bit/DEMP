@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+:root {
+  --degen-black: #0a0a09;
+  --degen-cream: #fbfbef;
+  --degen-neon: #08f816;
+  --degen-cyan: #00e5ff;
+  --degen-magenta: #ff2bd6;
+  --background: #0a0a09;
+  --foreground: #fbfbef;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-degen-black: var(--degen-black);
+  --color-degen-cream: var(--degen-cream);
+  --color-degen-neon: var(--degen-neon);
+  --color-degen-cyan: var(--degen-cyan);
+  --color-degen-magenta: var(--degen-magenta);
+  --font-sans: var(--font-display);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--degen-black);
+  color: var(--degen-cream);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  min-height: 100vh;
+}
+
+::selection {
+  background: var(--degen-neon);
+  color: #000;
+}
+
+.noise-bg {
+  background-color: var(--degen-black);
+  position: relative;
+  isolation: isolate;
+}
+
+.collage-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("/bg-collage.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.55;
+}
+
+.collage-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 35%, rgba(10, 10, 9, 0.35), rgba(10, 10, 9, 0.78) 70%),
+    linear-gradient(180deg, rgba(10, 10, 9, 0.45) 0%, rgba(10, 10, 9, 0.72) 100%);
+}
+
+.cream-panel {
+  background: var(--degen-cream);
+  color: #111;
+  border: 2px solid #000;
+  box-shadow: 6px 6px 0 #000;
+}
+
+.cream-panel-soft {
+  background: var(--degen-cream);
+  color: #111;
+  border: 2px solid #000;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.neon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--degen-neon);
+  color: #000;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 3px solid #000;
+  box-shadow: 5px 5px 0 #000;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+  text-decoration: none;
+  user-select: none;
+}
+
+.neon-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0 #000;
+}
+
+.neon-btn:active {
+  transform: translate(5px, 5px);
+  box-shadow: 0 0 0 #000;
+}
+
+.section-label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(251, 251, 239, 0.55);
+}
+
+.mark-tile {
+  background: #111;
+  border: 2px solid #333;
+  transition: border-color 150ms ease, transform 150ms ease;
+}
+
+.mark-tile:hover {
+  border-color: var(--degen-neon);
+  transform: translateY(-2px);
+}
+
+.grain::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
