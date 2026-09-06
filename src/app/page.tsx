@@ -33,9 +33,9 @@ const ECOSYSTEM = [
 export default function HomePage() {
   return (
     <main className="flex flex-1 flex-col">
-      {/* HERO: one punch, CTA above fold */}
-      <section className="relative flex min-h-[calc(100dvh-var(--header-h))] flex-col justify-start pt-4 pb-10 sm:pt-6 sm:pb-12 lg:pt-8 lg:pb-14">
-        <div className="page-shell grid items-start gap-5 sm:gap-7 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:gap-10 xl:gap-14">
+      {/* HERO: big mark, pinned high, fits the fold */}
+      <section className="relative pt-3 pb-12 sm:pt-5 sm:pb-16 lg:pt-6 lg:pb-20">
+        <div className="page-shell grid items-start gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-12 xl:gap-16">
           <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
             <p className="section-label mb-2 sm:mb-3">PulseChain first. Always.</p>
             <Image
@@ -44,27 +44,27 @@ export default function HomePage() {
               width={720}
               height={720}
               priority
-              className="hero-logo h-auto w-full max-w-[min(100%,22rem)] drop-shadow-[0_0_48px_rgba(0,229,255,0.18)] sm:max-w-[min(100%,28rem)] lg:max-w-none"
+              className="hero-logo h-auto w-full max-h-[min(42vh,20rem)] object-contain object-center drop-shadow-[0_0_48px_rgba(0,229,255,0.18)] sm:max-h-[min(48vh,28rem)] lg:max-h-[min(56vh,34rem)] lg:object-left"
             />
             <p className="mt-3 max-w-[28rem] text-sm leading-relaxed text-degen-cream/75 sm:mt-4 sm:text-[0.95rem]">
               Merch that punches. Tools that report the tape. No pitch decks.
               Just the shop and the chain.
             </p>
-            <div className="mt-5 w-full max-w-xs sm:mt-6 sm:max-w-none sm:w-auto">
+            <div className="mt-4 w-full max-w-xs sm:mt-5 sm:max-w-none sm:w-auto">
               <NeonButton href="/store" className="w-full sm:w-auto">
                 Enter store
               </NeonButton>
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[280px] sm:max-w-[320px] lg:mx-0 lg:max-w-[380px] lg:justify-self-end">
+          <div className="relative mx-auto w-full max-w-[min(100%,42vh,18rem)] sm:max-w-[min(100%,48vh,22rem)] lg:mx-0 lg:max-w-[min(100%,56vh,26rem)] lg:justify-self-end">
             <div className="cream-panel overflow-hidden rounded-[14px] p-1.5 sm:p-2.5">
-              <div className="relative aspect-square overflow-hidden rounded-[10px] bg-[#6BBEE2]">
+              <div className="relative aspect-square w-full overflow-hidden rounded-[10px] bg-[#6BBEE2]">
                 <Image
                   src="/mascot-degen.png"
                   alt="Degen mascot"
                   fill
-                  sizes="(max-width: 640px) 280px, (max-width: 1024px) 320px, 380px"
+                  sizes="(max-width: 640px) 288px, (max-width: 1024px) 352px, 416px"
                   className="object-cover object-top"
                   priority
                 />
