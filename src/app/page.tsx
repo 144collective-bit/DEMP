@@ -33,20 +33,19 @@ const ECOSYSTEM = [
 export default function HomePage() {
   return (
     <main className="flex flex-1 flex-col">
-      {/* HERO: big mark, pinned high, fits the fold */}
-      <section className="relative pt-3 pb-12 sm:pt-5 sm:pb-16 lg:pt-6 lg:pb-20">
-        <div className="page-shell grid items-start gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-12 xl:gap-16">
+      {/* HERO: logo + mascot top-aligned, no eyebrow/caption */}
+      <section className="relative pt-4 pb-12 sm:pt-6 sm:pb-16 lg:pt-8 lg:pb-20">
+        <div className="page-shell grid items-start gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:gap-10 xl:gap-14">
           <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-            <p className="section-label mb-2 sm:mb-3">PulseChain first. Always.</p>
             <Image
               src="/logo-main.png"
               alt="The Degen Emporium"
               width={720}
               height={720}
               priority
-              className="hero-logo h-auto w-full max-h-[min(42vh,20rem)] object-contain object-center drop-shadow-[0_0_48px_rgba(0,229,255,0.18)] sm:max-h-[min(48vh,28rem)] lg:max-h-[min(56vh,34rem)] lg:object-left"
+              className="hero-logo h-auto w-full max-h-[min(46vh,22rem)] object-contain object-center drop-shadow-[0_0_48px_rgba(0,229,255,0.18)] sm:max-h-[min(52vh,30rem)] lg:max-h-[min(60vh,36rem)] lg:object-left lg:object-top"
             />
-            <p className="mt-3 max-w-[28rem] text-sm leading-relaxed text-degen-cream/75 sm:mt-4 sm:text-[0.95rem]">
+            <p className="mt-4 max-w-[28rem] text-sm leading-relaxed text-degen-cream/75 sm:mt-5 sm:text-[0.95rem]">
               Merch that punches. Tools that report the tape. No pitch decks.
               Just the shop and the chain.
             </p>
@@ -57,7 +56,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[min(100%,42vh,18rem)] sm:max-w-[min(100%,48vh,22rem)] lg:mx-0 lg:max-w-[min(100%,56vh,26rem)] lg:justify-self-end">
+          <div className="relative mx-auto w-full max-w-[min(100%,42vh,18rem)] sm:max-w-[min(100%,48vh,22rem)] lg:mx-0 lg:mt-0 lg:max-w-[min(100%,56vh,26rem)] lg:justify-self-end">
             <div className="cream-panel overflow-hidden rounded-[14px] p-1.5 sm:p-2.5">
               <div className="relative aspect-square w-full overflow-hidden rounded-[10px] bg-[#6BBEE2]">
                 <Image
@@ -70,9 +69,6 @@ export default function HomePage() {
                 />
               </div>
             </div>
-            <p className="mt-2.5 text-center text-[10px] uppercase tracking-[0.16em] text-degen-cream/45 sm:text-[11px] lg:text-left">
-              House mascot. Gas fee gummies sold separately.
-            </p>
           </div>
         </div>
       </section>
