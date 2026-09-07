@@ -173,15 +173,8 @@ p { margin: 14px 0; }
   background: var(--surface); border: 1px solid var(--line);
   overflow: hidden; display: flex; flex-direction: column;
 }
-/* Portrait windows are cropped out of the single group hero --
-   there is no per-character art, so each card scales and offsets
-   the same sheet. Values come from src/data/crew.ts. */
-.crew-shot {
-  aspect-ratio: 3 / 4;
-  background-repeat: no-repeat;
-  background-color: #000;
-  border-bottom: 1px solid var(--line);
-}
+/* Superseded by .crew-portrait -- real per-character cutouts replaced the
+   sprite-crop workaround once the separated lineup art arrived. */
 .crew-meta { padding: 14px 15px 16px; }
 .crew-meta .role {
   font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
@@ -240,9 +233,7 @@ p { margin: 14px 0; }
   overflow: hidden; transition: border-color .15s ease, transform .15s ease;
 }
 .crew-chip:hover { border-color: var(--cyan); transform: translateY(-3px); }
-.crew-chip .crew-shot {
-  display: block; aspect-ratio: 3 / 4; border-bottom: 0;
-}
+
 
 .duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
 .panel {
@@ -448,4 +439,25 @@ html { scrollbar-color: var(--line) transparent; scrollbar-width: thin; }
    and the least visible -- dial it back rather than paying for it. */
 @media (max-width: 640px) {
   body::before { opacity: .40; }
+}
+
+
+/* ------------------------------------------------- real team portraits */
+/* Replaces the sprite-crop workaround: these are genuine per-character
+   cutouts, so they are plain square images. */
+.crew-portrait {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #08070A;
+  display: block;
+}
+.crew-card .crew-portrait { border-bottom: 1px solid var(--line); }
+.crew-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.crew-chip { flex: 0 0 150px; }
+.lost-shot {
+  width: 260px; height: auto; aspect-ratio: 1 / 1;
+  margin: 26px auto 0; border: 1px solid var(--line);
+  background: #08070A;
 }

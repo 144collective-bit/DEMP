@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets';
+import { team } from '../data/team';
+
+import theSuit from '../assets/team/the-suit.png';
+import blue from '../assets/team/blue-balaclava.png';
+import gold from '../assets/team/gold-mask.png';
+import purple from '../assets/team/purple-third-eye.png';
+import pink from '../assets/team/pink-balaclava.png';
+
+const art: Record<string, ImageMetadata> = {
+  'the-suit': theSuit,
+  'blue-balaclava': blue,
+  'gold-mask': gold,
+  'purple-third-eye': purple,
+  'pink-balaclava': pink,
+};
+
+interface Props { compact?: boolean; }
+const { compact = false } = Astro.props;
+---
+<div class={compact ? 'crew-strip' : 'crew-grid'}>
+  {team.map((m) => (
+    compact ? (
+      <a class="crew-chip" href="/team" aria-label={m.name}>
+        <Image class="crew-portrait" src={art[m.slug]} alt={m.name}
+               widths={[180, 320]} sizes="160px" />
+      </a>
+    ) : (
+      <article class="crew-card">
+        <Image class="crew-portrait" src={art[m.slug]} alt={m.name}
+               widths={[300, 480, 640]} sizes="(max-width: 640px) 46vw, 300px" />
+        <div class="crew-meta">
+          <h3>{m.name}</h3>
+          <p class="role">{m.role}</p>
+        </div>
+      </article>
+    )
+  ))}
+</div>
