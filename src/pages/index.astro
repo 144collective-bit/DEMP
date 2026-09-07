@@ -1,0 +1,85 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import FollowCta from '../components/FollowCta.astro';
+import Ticker from '../components/Ticker.astro';
+import hero from '../assets/hero-crew.png';
+import { crew, cropStyle } from '../data/crew';
+import { SITE_NAME, X_HANDLE } from '../data/site';
+
+const posts = (await getCollection('news'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+
+const strip = crew.slice(0, 8);
+---
+<Base>
+  <section class="hero wrap">
+    {/* The wordmark is baked into the artwork, so the real page heading
+        lives here for search engines and screen readers. */}
+    <h1 class="vh">{SITE_NAME}</h1>
+    <div class="hero-bleed">
+      <Image class="hero-art" src={hero}
+        alt="The Degen Emporium crew: masked characters and mascots flanking the graffiti wordmark"
+        widths={[560, 900, 1105]} sizes="(max-width: 720px) 100vw, 980px"
+        loading="eager" fetchpriority="high" />
+    </div>
+    {/* TODO: replace with the real one-liner once positioning is settled. */}
+    <p class="hero-tag">Placeholder tagline &mdash; <b>one line goes here</b> saying what the Emporium is and who it is for.</p>
+    <FollowCta label={`Follow @${X_HANDLE}`} />
+  </section>
+
+  <Ticker />
+
+  <section class="wrap section">
+    <div class="section-head">
+      <h2>The Crew</h2>
+      <a href="/team">Meet everyone &rarr;</a>
+    </div>
+    <div class="crew-strip">
+      {strip.map((m) => (
+        <a class="crew-chip" href="/team" aria-label={m.name}>
+          <span class="crew-shot" style={cropStyle(m.box, hero.src, 220)}></span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <h2>Latest</h2>
+      <a href="/news">All news &rarr;</a>
+    </div>
+    <div class="news-list">
+      {posts.map((p) => (
+        <article class="news-item">
+          <time datetime={p.data.date.toISOString()}>{fmt(p.data.date)}</time>
+          <div>
+            <h3><a href={`/news/${p.id}/`}>{p.data.title}</a></h3>
+            <p>{p.data.summary}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="duo">
+      <a class="panel" href="/projects">
+        <span class="panel-k">01</span>
+        <h3>Projects</h3>
+        <p>What the Emporium ships.</p>
+      </a>
+      <a class="panel" href="/shop">
+        <span class="panel-k">02</span>
+        <h3>Shop</h3>
+        <p>Stickers and merch.</p>
+      </a>
+    </div>
+  </section>
+</Base>

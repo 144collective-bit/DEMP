@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+
+const posts = (await getCollection('news'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+---
+<Base title="News" description="Dispatches from The Degen Emporium.">
+  <div class="wrap">
+    <PageHeader name="news" title="News" />
+    {posts.length === 0 ? (
+      <p class="prose">No posts yet.</p>
+    ) : (
+      <div class="news-list" style="margin-top:28px">
+        {posts.map((p) => (
+          <article class="news-item">
+            <time datetime={p.data.date.toISOString()}>{fmt(p.data.date)}</time>
+            <div>
+              <h3><a href={`/news/${p.id}/`}>{p.data.title}</a></h3>
+              <p>{p.data.summary}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    )}
+  </div>
+</Base>

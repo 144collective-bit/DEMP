@@ -1,0 +1,451 @@
+/* ---------------------------------------------------------------
+   The Degen Emporium -- design tokens sampled from the crew art
+   and the six graffiti headers. Single dark theme on purpose:
+   every piece of brand art is drawn for a black ground.
+   --------------------------------------------------------------- */
+:root {
+  --ink:      #0A090C;
+  --surface:  #141118;
+  --surface2: #1C1823;
+  --line:     #2A2433;
+
+  --cyan:    #35C6EE;
+  --acid:    #B8E82B;
+  --magenta: #FF2E88;
+  --gold:    #FFC629;
+  --violet:  #7B2FBF;
+
+  --paper: #F4F1EA;
+  --text:  #E7E2DB;
+  --muted: #918A9C;
+
+  --display: "Bungee", Impact, sans-serif;
+  --body:    "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono:    "Space Mono", ui-monospace, Consolas, monospace;
+
+  --wrap: 1120px;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--cyan); text-decoration: none; }
+a:hover { color: var(--acid); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+/* screen-reader-only: the graffiti headers are images, so the real
+   heading text has to live here for search engines and screen readers */
+.vh {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+
+.eyebrow {
+  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--muted);
+  margin: 0 0 14px;
+}
+
+h2 {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(20px, 3vw, 28px); line-height: 1.2;
+  color: var(--paper); margin: 0; text-wrap: balance;
+}
+h3 { font-size: 18px; margin: 0; color: var(--paper); letter-spacing: -.01em; }
+p { margin: 14px 0; }
+.prose { max-width: 66ch; }
+.prose p { color: #C9C3D2; }
+
+/* ------------------------------------------------------------- nav */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(10, 9, 12, .92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-in {
+  max-width: var(--wrap); margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; gap: 28px; min-height: 62px;
+}
+.brand {
+  font-family: var(--display); font-size: 15px; color: var(--paper);
+  letter-spacing: .02em; white-space: nowrap;
+}
+.brand:hover { color: var(--acid); }
+.nav-links { display: flex; gap: 22px; margin-left: auto; flex-wrap: wrap; }
+.nav-links a {
+  font-family: var(--mono); font-size: 12px; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+}
+.nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--cyan); }
+
+/* ------------------------------------------------- graffiti headers */
+.pagehead { padding: 52px 0 8px; }
+.pagehead img { width: min(520px, 84vw); }
+
+/* ------------------------------------------------------------ hero */
+.hero { padding-block: 28px 8px; text-align: center; }
+.hero-tag {
+  font-family: var(--mono); font-size: clamp(12px, 2vw, 15px);
+  letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+  margin: 26px auto 0; max-width: 54ch;
+}
+.hero-tag b { color: var(--acid); font-weight: 700; }
+
+/* ------------------------------------------------------------- cta */
+.cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--display); font-size: 15px;
+  background: var(--cyan); color: #08121A;
+  padding: 14px 24px; border-radius: 4px;
+  border: 3px solid var(--paper);
+  box-shadow: 0 8px 0 rgba(0,0,0,.5);
+  transition: transform .14s ease, box-shadow .14s ease, background .14s ease;
+}
+.cta:hover {
+  background: var(--acid); color: #10160A;
+  transform: translateY(-2px); box-shadow: 0 10px 0 rgba(0,0,0,.55);
+}
+.cta:active { transform: translateY(2px); box-shadow: 0 4px 0 rgba(0,0,0,.5); }
+.cta-row { display: flex; justify-content: center; margin-top: 34px; }
+
+/* ---------------------------------------------------------- section */
+.section { padding-block: 64px; border-top: 1px solid var(--line); margin-top: 64px; }
+.section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 20px; flex-wrap: wrap; margin-bottom: 28px;
+}
+.section-head a { font-family: var(--mono); font-size: 12px;
+  letter-spacing: .12em; text-transform: uppercase; }
+
+/* ------------------------------------------------------------ news */
+.news-list { display: flex; flex-direction: column; }
+.news-item {
+  display: grid; grid-template-columns: 130px 1fr; gap: 24px;
+  padding: 22px 0; border-bottom: 1px solid var(--line); align-items: baseline;
+}
+.news-item:first-child { border-top: 1px solid var(--line); }
+.news-item time {
+  font-family: var(--mono); font-size: 12px; color: var(--muted);
+  letter-spacing: .08em; text-transform: uppercase;
+}
+.news-item h3 a { color: var(--paper); }
+.news-item h3 a:hover { color: var(--cyan); }
+.news-item p { margin: 7px 0 0; font-size: 15px; color: #B8B2C4; }
+
+.post { padding-block: 40px 0; }
+.post-title {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(26px, 4.6vw, 40px); line-height: 1.14;
+  color: var(--paper); margin: 14px 0 0; text-wrap: balance;
+}
+.post-body { max-width: 66ch; margin-top: 30px; font-size: 17px; }
+.post-body h2 { margin: 36px 0 10px; }
+.post-body a { border-bottom: 1px solid rgba(53,198,238,.4); }
+
+/* ------------------------------------------------------------ crew */
+.crew-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 20px; margin-top: 30px;
+}
+.crew-card {
+  background: var(--surface); border: 1px solid var(--line);
+  overflow: hidden; display: flex; flex-direction: column;
+}
+/* Portrait windows are cropped out of the single group hero --
+   there is no per-character art, so each card scales and offsets
+   the same sheet. Values come from src/data/crew.ts. */
+.crew-shot {
+  aspect-ratio: 3 / 4;
+  background-repeat: no-repeat;
+  background-color: #000;
+  border-bottom: 1px solid var(--line);
+}
+.crew-meta { padding: 14px 15px 16px; }
+.crew-meta .role {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted); margin: 5px 0 0;
+}
+
+/* ----------------------------------------------------------- notice */
+.notice {
+  border-left: 3px solid var(--gold);
+  background: linear-gradient(90deg, rgba(255,198,41,.07), transparent 72%);
+  padding: 16px 20px; margin: 26px 0; max-width: 70ch;
+}
+.notice .tag {
+  font-family: var(--mono); font-size: 10px; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--gold);
+}
+.notice p { margin: 7px 0 0; font-size: 15px; color: #CFC9D6; }
+
+/* ----------------------------------------------------------- footer */
+.footer {
+  border-top: 1px solid var(--line); margin-top: 80px;
+  padding: 40px 0 56px;
+}
+.footer-in { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+.footer-note {
+  font-family: var(--mono); font-size: 11px; color: var(--muted);
+  letter-spacing: .1em; text-transform: uppercase; line-height: 1.9;
+}
+
+@media (max-width: 640px) {
+  .news-item { grid-template-columns: 1fr; gap: 6px; }
+  .nav-in { gap: 16px; min-height: 56px; }
+  .nav-links { gap: 14px; }
+}
+
+
+/* ---------------------------------------------------- homepage extras */
+/* On phones the hero goes edge to edge: the wordmark is baked into the
+   artwork, so shrinking it inside the 24px gutter makes it unreadable. */
+.hero-bleed { margin-inline: 0; }
+.hero-art { width: min(980px, 100%); margin: 0 auto; }
+
+@media (max-width: 720px) {
+  .hero-bleed { margin-inline: -24px; }
+  .hero-art { width: 100%; }
+}
+
+.crew-strip {
+  display: flex; gap: 14px; overflow-x: auto; padding-bottom: 8px;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin; scrollbar-color: var(--line) transparent;
+}
+.crew-chip {
+  flex: 0 0 132px; scroll-snap-align: start;
+  border: 1px solid var(--line); background: var(--surface);
+  overflow: hidden; transition: border-color .15s ease, transform .15s ease;
+}
+.crew-chip:hover { border-color: var(--cyan); transform: translateY(-3px); }
+.crew-chip .crew-shot {
+  display: block; aspect-ratio: 3 / 4; border-bottom: 0;
+}
+
+.duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.panel {
+  border: 1px solid var(--line); background: var(--surface);
+  padding: 26px 24px 28px; display: block; color: inherit;
+  transition: border-color .15s ease, background .15s ease;
+}
+.panel:hover { border-color: var(--acid); background: var(--surface2); }
+.panel:hover h3 { color: var(--acid); }
+.panel-k {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+  color: var(--muted);
+}
+.panel h3 { margin: 10px 0 0; font-family: var(--display); font-weight: 400; font-size: 21px; }
+.panel p { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
+
+.lost-shot {
+  width: 260px; aspect-ratio: 3 / 4; margin: 26px auto 0;
+  border: 1px solid var(--line); background-color: #000;
+  background-repeat: no-repeat;
+}
+
+/* ---------------------------------------------------------- mobile nav */
+/* Six links plus the wordmark cannot share a row on a phone: left to
+   itself the flex row wraps into three ragged lines around the brand.
+   Give the brand its own row and let the links scroll horizontally. */
+@media (max-width: 760px) {
+  .nav-in {
+    flex-wrap: wrap;
+    row-gap: 2px;
+    min-height: 0;
+    padding-block: 11px;
+  }
+  .brand { width: 100%; font-size: 14px; }
+  .nav-links {
+    margin-left: 0;
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 18px;
+    padding-bottom: 3px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a { white-space: nowrap; }
+}
+
+
+/* =====================================================================
+   COLLAGE BACKGROUND
+   The sticker collage sits behind everything, heavily dimmed. It is
+   pre-darkened at export (scripts/gen_bg.py) so this layer stays subtle
+   and text contrast never depends on a single opacity value.
+   Two fixed layers: the art, then a scrim + coloured haze that lifts the
+   centre and keeps the page edges dark.
+   ===================================================================== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: url("/bg-collage.jpg") center center / cover no-repeat;
+  opacity: .58;
+  filter: saturate(.95);
+  pointer-events: none;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(125% 78% at 50% -8%,  rgba(123, 47,191,.20), transparent 62%),
+    radial-gradient(95%  55% at 50% 104%, rgba( 53,198,238,.12), transparent 62%),
+    linear-gradient(180deg,
+      rgba(10,9,12,.52) 0%,
+      rgba(10,9,12,.72) 42%,
+      rgba(10,9,12,.82) 100%);
+}
+
+/* ---------------------------------------------------------- glow scale */
+:root {
+  --glow-cyan:    0 0 34px rgba( 53,198,238,.42);
+  --glow-acid:    0 0 34px rgba(184,232,43,.40);
+  --glow-magenta: 0 0 30px rgba(255, 46,136,.34);
+  --glow-violet:  0 0 46px rgba(123, 47,191,.34);
+}
+
+/* Surfaces go translucent so the collage reads faintly through them --
+   this is what ties the panels to the background instead of sitting on it. */
+.panel,
+.crew-card,
+.crew-chip,
+.notice {
+  background: rgba(20, 17, 24, .72);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+}
+.nav { background: rgba(10, 9, 12, .78); }
+
+/* --------------------------------------------- elements that cast light */
+.hero { position: relative; }
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 4%;
+  transform: translateX(-50%);
+  width: min(980px, 116%);
+  aspect-ratio: 16 / 9;
+  pointer-events: none;
+  background: radial-gradient(closest-side,
+    rgba(53,198,238,.22), rgba(123,47,191,.13) 52%, transparent 76%);
+  filter: blur(16px);
+}
+
+.pagehead { position: relative; }
+.pagehead::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -4%;
+  top: 12%;
+  width: min(620px, 96%);
+  height: 76%;
+  pointer-events: none;
+  background: radial-gradient(closest-side,
+    rgba(53,198,238,.20), rgba(123,47,191,.12) 55%, transparent 78%);
+  filter: blur(18px);
+}
+
+.cta {
+  box-shadow: 0 8px 0 rgba(0,0,0,.5), var(--glow-cyan);
+}
+.cta:hover {
+  box-shadow: 0 10px 0 rgba(0,0,0,.55), var(--glow-acid);
+}
+.cta:active {
+  box-shadow: 0 4px 0 rgba(0,0,0,.5), var(--glow-acid);
+}
+
+/* Die-cut keyline on hover -- the white sticker edge from the artwork. */
+.crew-card { transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease; }
+.crew-card:hover {
+  border-color: rgba(244,241,234,.8);
+  box-shadow: var(--glow-cyan);
+  transform: translateY(-3px);
+}
+.crew-chip:hover { box-shadow: var(--glow-cyan); }
+.panel:hover { box-shadow: var(--glow-acid); }
+
+.news-item { transition: background .16s ease; }
+.news-item:hover { background: rgba(28, 24, 35, .5); }
+
+/* ------------------------------------------------------------- ticker */
+/* Slang lifted straight out of the collage artwork. */
+.ticker {
+  border-block: 1px solid var(--line);
+  background: rgba(10, 9, 12, .62);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  overflow: hidden;
+  margin-top: 48px;
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-slide 42s linear infinite;
+}
+.ticker-seq { display: flex; }
+.ticker-seq span {
+  font-family: var(--display);
+  font-size: 13px;
+  letter-spacing: .05em;
+  color: #7E7789;
+  padding: 13px 0;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+}
+.ticker-seq span::after {
+  content: "\25C6";
+  color: var(--cyan);
+  opacity: .55;
+  margin: 0 26px;
+  font-size: 9px;
+}
+@keyframes ticker-slide { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }
+
+/* -------------------------------------------------- browser furniture */
+::selection { background: var(--acid); color: #10160A; }
+html { scrollbar-color: var(--line) transparent; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: var(--violet); }
+
+/* On phones the fixed background is the most expensive thing on screen
+   and the least visible -- dial it back rather than paying for it. */
+@media (max-width: 640px) {
+  body::before { opacity: .40; }
+}

@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { crew, cropStyle } from '../data/crew';
+import hero from '../assets/hero-crew.png';
+---
+<Base title="Team" description="The Degen Emporium crew.">
+  <div class="wrap">
+    <PageHeader name="team" title="Team" />
+
+    <div class="notice">
+      <span class="tag">Build note &mdash; remove before launch</span>
+      <p>There is no individual character art. Every portrait below is a
+      cropped window onto the single group hero, so crops are approximate and
+      neighbours bleed in at the edges. Names and roles are placeholders.</p>
+    </div>
+
+    <div class="crew-grid">
+      {crew.map((m) => (
+        <article class="crew-card">
+          <div class="crew-shot" style={cropStyle(m.box, hero.src, 300)}
+               role="img" aria-label={m.name}></div>
+          <div class="crew-meta">
+            <h3>{m.name}</h3>
+            <p class="role">{m.role}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</Base>

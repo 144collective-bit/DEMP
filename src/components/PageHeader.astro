@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets';
+import about    from '../assets/headers/about.png';
+import contact  from '../assets/headers/contact.png';
+import news     from '../assets/headers/news.png';
+import projects from '../assets/headers/projects.png';
+import shop     from '../assets/headers/shop.png';
+import team     from '../assets/headers/team.png';
+
+const sheets = { about, contact, news, projects, shop, team } as const;
+
+interface Props { name: keyof typeof sheets; title: string; }
+const { name, title } = Astro.props;
+---
+<div class="pagehead">
+  <h1 class="vh">{title}</h1>
+  <Image src={sheets[name]} alt={title} widths={[360, 520, 760]}
+         sizes="(max-width: 640px) 84vw, 520px" loading="eager" />
+</div>

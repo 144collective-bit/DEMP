@@ -1,0 +1,25 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import FollowCta from '../../components/FollowCta.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('news');
+  return posts.map((p) => ({ params: { slug: p.id }, props: { post: p } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+---
+<Base title={post.data.title} description={post.data.summary}>
+  <article class="wrap post">
+    <p class="eyebrow">
+      <a href="/news">News</a> &nbsp;/&nbsp; {fmt(post.data.date)}
+    </p>
+    <h1 class="post-title">{post.data.title}</h1>
+    <div class="post-body"><Content /></div>
+    <FollowCta label="Follow for the next one" />
+  </article>
+</Base>
