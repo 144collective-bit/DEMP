@@ -1,13 +1,41 @@
 ---
-import { X_URL } from '../data/site';
+import { X_URL, X_HANDLE, SITE_NAME } from '../data/site';
+
+const explore = [
+  { href: '/news', label: 'News' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/team', label: 'Team' },
+  { href: '/shop', label: 'Shop' },
+  { href: '/links', label: 'Links' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
 ---
 <footer class="footer">
-  <div class="wrap footer-in">
-    <a class="cta" href={X_URL} rel="me noopener" target="_blank">Follow on X</a>
-    <p class="footer-note">
-      The Degen Emporium<br>
-      {/* Reserved slot: email capture drops in here without a redesign. */}
-      &copy; {new Date().getFullYear()}
-    </p>
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <p class="footer-mark">DEGEN EMPORIUM</p>
+      <p class="footer-blurb">Stickers, a crew, and the projects we keep building.</p>
+      <a class="cta cta-sm" href={X_URL} rel="me noopener" target="_blank">Follow @{X_HANDLE}</a>
+    </div>
+
+    <nav class="footer-col" aria-label="Footer">
+      <p class="footer-h">Explore</p>
+      <ul>{explore.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+    </nav>
+
+    <div class="footer-col">
+      <p class="footer-h">Elsewhere</p>
+      <ul>
+        <li><a href={X_URL} rel="me noopener" target="_blank">X / @{X_HANDLE}</a></li>
+        <li><a href="/rss.xml">RSS</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap footer-base">
+    <span>&copy; {new Date().getFullYear()} {SITE_NAME}</span>
+    <span class="footer-dot">&#9670;</span>
+    <span>Built on black</span>
   </div>
 </footer>

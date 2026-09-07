@@ -19,22 +19,28 @@ const art: Record<string, ImageMetadata> = {
 interface Props { compact?: boolean; }
 const { compact = false } = Astro.props;
 ---
-<div class={compact ? 'crew-strip' : 'crew-grid'}>
-  {team.map((m) => (
-    compact ? (
-      <a class="crew-chip" href="/team" aria-label={m.name}>
+{compact ? (
+  <div class="crew-strip">
+    {team.map((m) => (
+      <a class="crew-chip" href="/team" aria-label={`${m.name}, ${m.role}`}>
         <Image class="crew-portrait" src={art[m.slug]} alt={m.name}
                widths={[180, 320]} sizes="160px" />
+        <span class="chip-name">{m.name}</span>
       </a>
-    ) : (
-      <article class="crew-card">
+    ))}
+  </div>
+) : (
+  <div class="team-grid">
+    {team.map((m) => (
+      <article class="team-card">
         <Image class="crew-portrait" src={art[m.slug]} alt={m.name}
-               widths={[300, 480, 640]} sizes="(max-width: 640px) 46vw, 300px" />
-        <div class="crew-meta">
+               widths={[300, 480, 640]} sizes="(max-width: 640px) 46vw, 260px" />
+        <div class="team-body">
           <h3>{m.name}</h3>
           <p class="role">{m.role}</p>
+          <p class="bio">{m.bio}</p>
         </div>
       </article>
-    )
-  ))}
-</div>
+    ))}
+  </div>
+)}

@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import { links } from '../data/links';
+---
+<Base title="Links" description="PulseChain projects and where to find them.">
+  <div class="wrap">
+    {/* No graffiti header exists for Links yet, so this page uses the
+        display face. Worth having one drawn to match the other six. */}
+    <div class="pagehead texthead">
+      <h1>Links</h1>
+    </div>
+
+    <p class="prose lede">PulseChain projects worth your time.</p>
+
+    <div class="notice">
+      <span class="tag">Needs two things</span>
+      <p>The wordmark art isn't on disk yet, and I haven't written descriptions
+      &mdash; I don't know what each project does or how the Emporium relates to
+      it, and inventing that on an outward-facing page would be worse than
+      leaving it blank.</p>
+    </div>
+
+    <ul class="linklist">
+      {links.map((l) => (
+        <li>
+          <a class="linkrow" href={l.url} target="_blank" rel="noopener">
+            <span class="linkname">{l.name}</span>
+            <span class="linkdomain">{l.domain}</span>
+            <span class="linkarrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Base>

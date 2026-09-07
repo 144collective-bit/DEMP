@@ -1,17 +1,26 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
+import sheet from '../assets/sticker-sheet.png';
 ---
-<Base title="Shop">
+<Base title="Shop" description="The Degen Emporium sticker range.">
   <div class="wrap">
     <PageHeader name="shop" title="Shop" />
-    <div class="prose" style="margin-top:26px">
-      <div class="notice">
-        <span class="tag">Blocked on a decision</span>
-        <p>A static site cannot take payments by itself. Pick a route &mdash;
-        print-on-demand (Printful), hosted checkout (Gumroad, Shopify Lite), or
-        link out to an existing storefront &mdash; and this page gets built to it.</p>
-      </div>
+    <p class="prose lede">Stickers. The whole range, drawn to be slapped on something.</p>
+
+    <figure class="sheet">
+      <Image src={sheet} alt="The Degen Emporium sticker range: balaclavas, mascots, crypto slang and ecosystem marks, die-cut on black"
+             widths={[640, 1000, 1536]} sizes="(max-width: 900px) 94vw, 1040px" />
+      <figcaption>Every design in the range, on one sheet.</figcaption>
+    </figure>
+
+    <div class="notice">
+      <span class="tag">Checkout not wired yet</span>
+      <p>A static site can't take payments on its own. Pick a route &mdash;
+      print-on-demand (Printful), hosted checkout (Gumroad, Shopify Lite), or
+      linking out to a storefront you already run &mdash; and this becomes a
+      real shop. Individual products need per-sticker art and prices.</p>
     </div>
   </div>
 </Base>
