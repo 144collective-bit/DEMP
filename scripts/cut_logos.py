@@ -58,19 +58,24 @@ for fn, slug in JOBS:
     if bbox:
         out = out.crop(bbox)
 
-    # These render small; 1400px wide is plenty and keeps the repo sane.
-    if out.size[0] > 1400:
-        r = 1400 / out.size[0]
-        out = out.resize((1400, max(1, round(out.size[1] * r))), Image.LANCZOS)
+    # Astro never generates above 700px wide for these rows, so anything
+    # past ~800 is bytes no browser receives. Marks are currently unused.
+    cap = 640 if slug.endswith("-mark") else 800
+    if out.size[0] > cap:
+        r = cap / out.size[0]
+        out = out.resize((cap, max(1, round(out.size[1] * r))), Image.LANCZOS)
 
-    dst = os.path.join(OUT, slug + ".png")
-    out.save(dst, optimize=True)
+    # WebP, not PNG: these are gradient-heavy stickers that PNG stores
+    # badly (5x larger), and the sources are lossy JPEG anyway, so there
+    # is no lossless original being degraded.
+    dst = os.path.join(OUT, slug + ".webp")
+    out.save(dst, "WEBP", quality=90, method=6)
     t = 100.0 * (np.asarray(out)[:, :, 3] < 8).sum() / (out.size[0] * out.size[1])
     print(f"  {slug:16s} {out.size[0]:5d}x{out.size[1]:<5d} {os.path.getsize(dst)//1024:5d} KB  {t:4.1f}% transparent")
 
 # contact sheet on black to eyeball the cutouts
-cells = [Image.open(os.path.join(OUT, s + ".png")).convert("RGBA") for _, s in JOBS
-         if os.path.exists(os.path.join(OUT, s + ".png"))]
+cells = [Image.open(os.path.join(OUT, s + ".webp")).convert("RGBA") for _, s in JOBS
+         if os.path.exists(os.path.join(OUT, s + ".webp"))]
 W = 620
 scaled = []
 for c in cells:
