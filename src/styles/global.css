@@ -662,3 +662,33 @@ html { scrollbar-color: var(--line) transparent; scrollbar-width: thin; }
   color: var(--muted);
   margin-top: 14px;
 }
+
+
+/* ------------------------------------------- links page, with wordmarks */
+/* The wordmarks carry the project name, so the row drops its text label.
+   Ratios differ a lot between marks, so height is fixed and width runs
+   free rather than forcing them all to one box. */
+.linkrow { grid-template-columns: 1fr auto auto; padding: 22px 24px; }
+.linkmark { display: flex; align-items: center; min-width: 0; }
+.linkmark img {
+  height: 54px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 3px 10px rgba(0,0,0,.55));
+  transition: filter .16s ease, transform .16s ease;
+}
+.linkrow:hover .linkmark img {
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,.6)) drop-shadow(0 0 18px rgba(255,46,136,.45));
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .linkmark img { height: 40px; }
+  .linkrow { padding: 18px 18px; gap: 12px; }
+}
+@media (max-width: 460px) {
+  .linkmark img { height: 34px; }
+  .linkdomain { display: none; }
+}

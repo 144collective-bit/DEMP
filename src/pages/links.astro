@@ -1,10 +1,23 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import { links } from '../data/links';
+
+import pulsechain from '../assets/links/pulsechain-com.png';
+import hex from '../assets/links/hex-com.png';
+import pulsex from '../assets/links/pulsex-com.png';
+import provex from '../assets/links/provex-com.png';
+
+const art: Record<string, ImageMetadata> = {
+  'pulsechain-com': pulsechain,
+  'hex-com': hex,
+  'pulsex-com': pulsex,
+  'provex-com': provex,
+};
 ---
 <Base title="Links" description="PulseChain projects and where to find them.">
   <div class="wrap">
-    {/* No graffiti header exists for Links yet, so this page uses the
+    {/* No graffiti header art exists for Links, so this page uses the
         display face. Worth having one drawn to match the other six. */}
     <div class="pagehead texthead">
       <h1>Links</h1>
@@ -12,24 +25,26 @@ import { links } from '../data/links';
 
     <p class="prose lede">PulseChain projects worth your time.</p>
 
-    <div class="notice">
-      <span class="tag">Needs two things</span>
-      <p>The wordmark art isn't on disk yet, and I haven't written descriptions
-      &mdash; I don't know what each project does or how the Emporium relates to
-      it, and inventing that on an outward-facing page would be worse than
-      leaving it blank.</p>
-    </div>
-
     <ul class="linklist">
       {links.map((l) => (
         <li>
           <a class="linkrow" href={l.url} target="_blank" rel="noopener">
-            <span class="linkname">{l.name}</span>
+            <span class="linkmark">
+              <Image src={art[l.slug]} alt={l.name}
+                     widths={[420, 700]} sizes="(max-width: 560px) 70vw, 340px" />
+            </span>
             <span class="linkdomain">{l.domain}</span>
             <span class="linkarrow" aria-hidden="true">&rarr;</span>
           </a>
         </li>
       ))}
     </ul>
+
+    <div class="notice">
+      <span class="tag">Missing one thing</span>
+      <p>No descriptions yet &mdash; I don't know what each project does, or
+      whether the Emporium builds them, contributes to them or just rates
+      them. Send a line each and they go in.</p>
+    </div>
   </div>
 </Base>
