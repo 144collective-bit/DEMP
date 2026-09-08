@@ -6,6 +6,7 @@ import FollowCta from '../components/FollowCta.astro';
 import Ticker from '../components/Ticker.astro';
 import TeamGrid from '../components/TeamGrid.astro';
 import hero from '../assets/hero-crew.png';
+import { projects } from '../data/projects';
 import { SITE_NAME, X_HANDLE } from '../data/site';
 
 const posts = (await getCollection('news'))
@@ -13,11 +14,18 @@ const posts = (await getCollection('news'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
+// The front page shows what is moving, not the full list -- parked things are
+// honest on /projects but make a poor shop window.
+// Three, to match "Latest" and to fill the desktop row exactly rather than
+// stranding a fourth card on its own.
+const featured = projects.filter((p) => p.status !== 'Parked').slice(0, 3);
+
 const fmt = (d: Date) =>
   d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z]+/g, '-');
 ---
-<Base>
+<Base description="Stickers, a crew of five, and the projects The Degen Emporium keeps building. Drawn on black, cut for dark surfaces.">
   <section class="hero wrap">
     {/* The wordmark is baked into the artwork, so the real page heading
         lives here for search engines and screen readers. */}
@@ -45,6 +53,23 @@ const fmt = (d: Date) =>
 
   <section class="wrap section">
     <div class="section-head">
+      <h2>On the bench</h2>
+      <a href="/projects">The full list &rarr;</a>
+    </div>
+    <ul class="proj-grid proj-grid-home">
+      {featured.map((p) => (
+        <li class="proj-card">
+          <p class="proj-kind">{p.kind}</p>
+          <h3>{p.name}</h3>
+          <p class="proj-line">{p.line}</p>
+          <p class={`status status-${slug(p.status)}`}>{p.status}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
       <h2>Latest</h2>
       <a href="/news">All news &rarr;</a>
     </div>
@@ -63,16 +88,28 @@ const fmt = (d: Date) =>
 
   <section class="wrap section">
     <div class="duo">
-      <a class="panel" href="/projects">
-        <span class="panel-k">01</span>
-        <h3>Projects</h3>
-        <p>What the Emporium ships.</p>
-      </a>
       <a class="panel" href="/shop">
-        <span class="panel-k">02</span>
+        <span class="panel-k">01</span>
         <h3>Shop</h3>
-        <p>Stickers and merch.</p>
+        <p>The whole sticker range on one sheet. Checkout not wired yet.</p>
       </a>
+      <a class="panel" href="/links">
+        <span class="panel-k">02</span>
+        <h3>Links</h3>
+        <p>Names you'll run into out here. Links only, no commentary.</p>
+      </a>
+      <a class="panel" href="/about">
+        <span class="panel-k">03</span>
+        <h3>About</h3>
+        <p>How a running joke turned into a sticker company.</p>
+      </a>
+    </div>
+
+    <div class="notice">
+      <span class="tag">Draft copy &mdash; approve before launch</span>
+      <p>Everything written on this site is placeholder in the brand voice,
+      including the line under the artwork above. It is here so the finished
+      site can be seen and reacted to, not because any of it is settled.</p>
     </div>
   </section>
 </Base>

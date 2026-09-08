@@ -15,7 +15,10 @@ const art: Record<string, ImageMetadata> = {
   'provex-com': provex,
 };
 ---
-<Base title="Links" description="PulseChain projects and where to find them.">
+<Base
+  title="Links"
+  description="Outbound links to PulseChain ecosystem project sites. Links only — no descriptions, ratings or endorsements."
+>
   <div class="wrap">
     {/* No graffiti header art exists for Links, so this page uses the
         display face. Worth having one drawn to match the other six. */}
@@ -23,28 +26,45 @@ const art: Record<string, ImageMetadata> = {
       <h1>Links</h1>
     </div>
 
-    <p class="prose lede">PulseChain projects worth your time.</p>
+    <p class="prose lede">
+      Names you will run into constantly out here. Every row goes straight to
+      that project's own site.
+    </p>
+
+    {/* These are real, third-party projects. This page is a set of outbound
+        links and nothing more -- see the comment at the top of data/links.ts. */}
+    <p class="prose disclaimer">
+      We link these. We do not run them, speak for them, rate them or explain
+      them, and nothing on this site is advice about what to do with your money.
+      Read each project's own site and make your own mind up.
+    </p>
 
     <ul class="linklist">
       {links.map((l) => (
-        <li>
+        <li class="linkitem">
           <a class="linkrow" href={l.url} target="_blank" rel="noopener">
             <span class="linkmark">
+              {/* The marks are height-constrained in CSS (54px, dropping to
+                  34px on a phone), so the widest any of them ever renders is
+                  about 180px -- the old 340px hint was serving roughly four
+                  times the pixels needed. */}
               <Image src={art[l.slug]} alt={l.name}
-                     widths={[420, 700]} sizes="(max-width: 560px) 70vw, 340px" />
+                     width={400} widths={[200, 400]} sizes="200px" />
             </span>
             <span class="linkdomain">{l.domain}</span>
             <span class="linkarrow" aria-hidden="true">&rarr;</span>
           </a>
+          <p class="linkblurb">{l.blurb}</p>
         </li>
       ))}
     </ul>
 
     <div class="notice">
-      <span class="tag">Missing one thing</span>
-      <p>No descriptions yet &mdash; I don't know what each project does, or
-      whether the Emporium builds them, contributes to them or just rates
-      them. Send a line each and they go in.</p>
+      <span class="tag">Draft copy &mdash; replace before launch</span>
+      <p>The line under each project is deliberately generic placeholder: it
+      describes the link, not the project. Nothing specific will be written here
+      about someone else's work without it coming from them. If real
+      descriptions are wanted, they need to be supplied and signed off.</p>
     </div>
   </div>
 </Base>

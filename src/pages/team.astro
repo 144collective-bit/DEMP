@@ -12,6 +12,12 @@ import TeamGrid from '../components/TeamGrid.astro';
       <p>Names and bios below are written, not supplied. Only <strong>Degen</strong>
       is confirmed. Say the word on any that miss and they change in one file.</p>
     </div>
+    {/* The grid's cards are <h3>s, so they need an <h2> above them or the
+        page outline jumps straight from h1 to h3. */}
+    <div class="section-head" style="margin-top:34px">
+      <h2>The five</h2>
+      <a href="/about">How this started &rarr;</a>
+    </div>
     <TeamGrid />
   </div>
 </Base>

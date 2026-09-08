@@ -10,9 +10,22 @@ const posts = (await getCollection('news'))
 const fmt = (d: Date) =>
   d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 ---
-<Base title="News" description="Dispatches from The Degen Emporium.">
+<Base title="News" description="Dispatches from The Degen Emporium: what changed, what shipped and what got dropped.">
   <div class="wrap">
     <PageHeader name="news" title="News" />
+
+    <p class="prose lede">
+      What changed, what shipped, what got quietly killed. Short, irregular, and
+      written by whoever was annoyed enough to write it.
+    </p>
+
+    <div class="notice">
+      <span class="tag">Draft copy &mdash; replace before launch</span>
+      <p>Every post below is placeholder written in the brand voice so the feed
+      can be seen populated. None of it reports anything that actually happened.
+      Delete the files in <code>src/content/news/</code> and write over them.</p>
+    </div>
+
     {posts.length === 0 ? (
       <p class="prose">No posts yet.</p>
     ) : (
@@ -21,12 +34,17 @@ const fmt = (d: Date) =>
           <article class="news-item">
             <time datetime={p.data.date.toISOString()}>{fmt(p.data.date)}</time>
             <div>
-              <h3><a href={`/news/${p.id}/`}>{p.data.title}</a></h3>
+              <h2><a href={`/news/${p.id}/`}>{p.data.title}</a></h2>
               <p>{p.data.summary}</p>
             </div>
           </article>
         ))}
       </div>
     )}
+
+    <p class="prose feed-note">
+      There is also an <a href="/rss.xml">RSS feed</a>, which is the only
+      notification this site will ever send you.
+    </p>
   </div>
 </Base>

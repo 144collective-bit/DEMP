@@ -101,7 +101,8 @@ p { margin: 14px 0; }
 .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--cyan); }
 
 /* ------------------------------------------------- graffiti headers */
-.pagehead { padding: 52px 0 8px; }
+/* .pagehead is the page's <h1>: the graffiti art is the title. */
+.pagehead { padding: 52px 0 8px; margin: 0; font-size: inherit; font-weight: 400; }
 .pagehead img { width: min(520px, 84vw); }
 
 /* ------------------------------------------------------------ hero */
@@ -150,8 +151,15 @@ p { margin: 14px 0; }
   font-family: var(--mono); font-size: 12px; color: var(--muted);
   letter-spacing: .08em; text-transform: uppercase;
 }
-.news-item h3 a { color: var(--paper); }
-.news-item h3 a:hover { color: var(--cyan); }
+/* Post titles are <h2> on /news (they sit directly under the page <h1>) and
+   <h3> in the homepage "Latest" block (under that section's <h2>). Same look
+   either way -- the level follows the outline, not the styling. */
+.news-item h2 {
+  font-family: var(--body); font-weight: 700; font-size: 18px;
+  margin: 0; color: var(--paper); letter-spacing: -.01em;
+}
+.news-item :is(h2, h3) a { color: var(--paper); }
+.news-item :is(h2, h3) a:hover { color: var(--cyan); }
 .news-item p { margin: 7px 0 0; font-size: 15px; color: #B8B2C4; }
 
 .post { padding-block: 40px 0; }
@@ -164,23 +172,6 @@ p { margin: 14px 0; }
 .post-body h2 { margin: 36px 0 10px; }
 .post-body a { border-bottom: 1px solid rgba(53,198,238,.4); }
 
-/* ------------------------------------------------------------ crew */
-.crew-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  gap: 20px; margin-top: 30px;
-}
-.crew-card {
-  background: var(--surface); border: 1px solid var(--line);
-  overflow: hidden; display: flex; flex-direction: column;
-}
-/* Superseded by .crew-portrait -- real per-character cutouts replaced the
-   sprite-crop workaround once the separated lineup art arrived. */
-.crew-meta { padding: 14px 15px 16px; }
-.crew-meta .role {
-  font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--muted); margin: 5px 0 0;
-}
-
 /* ----------------------------------------------------------- notice */
 .notice {
   border-left: 3px solid var(--gold);
@@ -192,17 +183,6 @@ p { margin: 14px 0; }
   letter-spacing: .16em; text-transform: uppercase; color: var(--gold);
 }
 .notice p { margin: 7px 0 0; font-size: 15px; color: #CFC9D6; }
-
-/* ----------------------------------------------------------- footer */
-.footer {
-  border-top: 1px solid var(--line); margin-top: 80px;
-  padding: 40px 0 56px;
-}
-.footer-in { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
-.footer-note {
-  font-family: var(--mono); font-size: 11px; color: var(--muted);
-  letter-spacing: .1em; text-transform: uppercase; line-height: 1.9;
-}
 
 @media (max-width: 640px) {
   .news-item { grid-template-columns: 1fr; gap: 6px; }
@@ -228,7 +208,7 @@ p { margin: 14px 0; }
   scrollbar-width: thin; scrollbar-color: var(--line) transparent;
 }
 .crew-chip {
-  flex: 0 0 132px; scroll-snap-align: start;
+  flex: 0 0 150px; scroll-snap-align: start;
   border: 1px solid var(--line); background: var(--surface);
   overflow: hidden; transition: border-color .15s ease, transform .15s ease;
 }
@@ -249,12 +229,6 @@ p { margin: 14px 0; }
 }
 .panel h3 { margin: 10px 0 0; font-family: var(--display); font-weight: 400; font-size: 21px; }
 .panel p { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
-
-.lost-shot {
-  width: 260px; aspect-ratio: 3 / 4; margin: 26px auto 0;
-  border: 1px solid var(--line); background-color: #000;
-  background-repeat: no-repeat;
-}
 
 /* ---------------------------------------------------------- mobile nav */
 /* Six links plus the wordmark cannot share a row on a phone: left to
@@ -327,7 +301,6 @@ body::after {
 /* Surfaces go translucent so the collage reads faintly through them --
    this is what ties the panels to the background instead of sitting on it. */
 .panel,
-.crew-card,
 .crew-chip,
 .notice {
   background: rgba(20, 17, 24, .72);
@@ -345,7 +318,9 @@ body::after {
   left: 50%;
   top: 4%;
   transform: translateX(-50%);
-  width: min(980px, 116%);
+  /* 100%, not 116%: an absolutely positioned box wider than the viewport
+     pushes a horizontal scrollbar onto every phone. */
+  width: min(980px, 100%);
   aspect-ratio: 16 / 9;
   pointer-events: none;
   background: radial-gradient(closest-side,
@@ -379,12 +354,6 @@ body::after {
 }
 
 /* Die-cut keyline on hover -- the white sticker edge from the artwork. */
-.crew-card { transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease; }
-.crew-card:hover {
-  border-color: rgba(244,241,234,.8);
-  box-shadow: var(--glow-cyan);
-  transform: translateY(-3px);
-}
 .crew-chip:hover { box-shadow: var(--glow-cyan); }
 .panel:hover { box-shadow: var(--glow-acid); }
 
@@ -453,9 +422,6 @@ html { scrollbar-color: var(--line) transparent; scrollbar-width: thin; }
   background: #08070A;
   display: block;
 }
-.crew-card .crew-portrait { border-bottom: 1px solid var(--line); }
-.crew-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
-.crew-chip { flex: 0 0 150px; }
 .lost-shot {
   width: 260px; height: auto; aspect-ratio: 1 / 1;
   margin: 26px auto 0; border: 1px solid var(--line);
@@ -580,7 +546,8 @@ html { scrollbar-color: var(--line) transparent; scrollbar-width: thin; }
   font-size: 11px;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: #6F6879;
+  /* was #6F6879 -- 3.7:1 on the ink, under AA for body text at 11px */
+  color: #8B8494;
 }
 .footer-dot { color: var(--violet); font-size: 8px; }
 
@@ -624,12 +591,6 @@ html { scrollbar-color: var(--line) transparent; scrollbar-width: thin; }
   box-shadow: var(--glow-magenta);
   transform: translateY(-2px);
 }
-.linkname {
-  font-family: var(--display);
-  font-size: 22px;
-  color: var(--paper);
-}
-.linkrow:hover .linkname { color: var(--magenta); }
 .linkdomain {
   font-family: var(--mono);
   font-size: 12px;
@@ -692,3 +653,268 @@ html { scrollbar-color: var(--line) transparent; scrollbar-width: thin; }
   .linkmark img { height: 34px; }
   .linkdomain { display: none; }
 }
+
+
+/* =====================================================================
+   POPULATED PAGES
+   Projects, shop line-up, contact layout and the link descriptions.
+   Same tokens, same surface treatment as the existing cards -- nothing
+   new enters the palette here.
+   ===================================================================== */
+
+/* ------------------------------------------------------- shared bits */
+.disclaimer {
+  font-size: 14px;
+  color: var(--muted);
+  border-left: 2px solid var(--line);
+  padding-left: 16px;
+  margin-top: 20px;
+  max-width: 62ch;
+}
+.notice code {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--gold);
+  word-break: break-word;
+}
+
+/* ------------------------------------------------------ project list */
+.proj-group { margin-top: 54px; }
+.proj-grouphead {
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  margin-bottom: 22px;
+}
+.proj-grouphead h2 { font-size: clamp(18px, 2.6vw, 24px); }
+.proj-grouphead p {
+  margin: 7px 0 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: var(--muted);
+  max-width: 58ch;
+}
+
+.proj-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+.proj-grid-home { margin-top: 4px; }
+
+.proj-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 20px 18px;
+  border: 1px solid var(--line);
+  background: rgba(20, 17, 24, .72);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+.proj-card:hover {
+  border-color: rgba(244, 241, 234, .7);
+  box-shadow: var(--glow-cyan);
+  transform: translateY(-3px);
+}
+.proj-kind {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.proj-card h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.25;
+  margin: 2px 0 0;
+}
+.proj-line {
+  margin: 4px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #B5AFC2;
+  flex: 1 1 auto;
+}
+
+/* Status chip. Values are a closed set (see data/projects.ts). */
+.status {
+  align-self: flex-start;
+  margin: 12px 0 0;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  color: var(--muted);
+}
+.status-shipped     { color: var(--acid); }
+.status-in-progress { color: var(--cyan); }
+.status-sketching   { color: var(--gold); }
+.status-parked      { color: var(--muted); }
+
+/* --------------------------------------------------------- shop grid */
+.shop-section { padding-block: 40px 0; margin-top: 40px; }
+.shop-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+.shop-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  background: rgba(20, 17, 24, .72);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+.shop-card:hover {
+  border-color: rgba(244, 241, 234, .7);
+  box-shadow: var(--glow-magenta);
+  transform: translateY(-3px);
+}
+.shop-body { padding: 20px 20px 6px; flex: 1 1 auto; }
+.shop-card h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.25;
+}
+.shop-line {
+  margin: 8px 0 14px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #B5AFC2;
+}
+.price {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0;
+  padding: 13px 20px 15px;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+}
+.price-k {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+/* Deliberately a dash: no prices are set, and a made-up one would be a lie. */
+.price-v { font-size: 18px; color: var(--gold); letter-spacing: .04em; }
+
+/* --------------------------------------------------------- link rows */
+.linkitem { display: flex; flex-direction: column; }
+.linkblurb {
+  margin: 10px 2px 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #B5AFC2;
+  max-width: 64ch;
+}
+
+/* ------------------------------------------------------ contact page */
+.contact-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 44px;
+  margin-top: 40px;
+  align-items: start;
+}
+.contact-cols h2 { font-size: clamp(18px, 2.6vw, 22px); margin-bottom: 18px; }
+
+.form { margin: 0; display: flex; flex-direction: column; gap: 18px; }
+.field { display: flex; flex-direction: column; gap: 6px; margin: 0; }
+.field label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.field input,
+.field textarea {
+  font-family: var(--body);
+  font-size: 15px;
+  color: var(--text);
+  background: rgba(20, 17, 24, .72);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 11px 13px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+.field textarea { resize: vertical; line-height: 1.6; }
+.field-hint { font-size: 12px; color: var(--muted); }
+.field-actions { flex-direction: row; align-items: center; gap: 14px; flex-wrap: wrap; }
+
+/* The whole form is switched off on purpose -- see the note in
+   pages/contact.astro. Make that visible rather than merely true. */
+.form-dead input,
+.form-dead textarea {
+  border-style: dashed;
+  opacity: .75;
+  cursor: not-allowed;
+}
+.form-dead .cta[disabled] {
+  background: var(--surface2);
+  color: var(--muted);
+  border-color: var(--line);
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.reach-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 22px; }
+.reach-list li { border-left: 2px solid var(--line); padding-left: 16px; }
+.reach-k {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.reach-list a { font-family: var(--display); font-size: 16px; }
+.reach-list p { margin: 6px 0 0; font-size: 14px; color: #B5AFC2; }
+
+@media (max-width: 860px) {
+  .contact-cols { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* -------------------------------------------------- about + post body */
+.about-body { margin-top: 34px; }
+.about-body h2 { margin: 38px 0 10px; }
+.about-body h2:first-child { margin-top: 0; }
+
+.post-summary {
+  margin: 16px 0 0;
+  max-width: 62ch;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.post-notice { margin-top: 40px; }
+.feed-note { margin-top: 34px; font-size: 15px; color: var(--muted); }
