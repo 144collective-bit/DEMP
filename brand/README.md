@@ -1,5 +1,9 @@
 # Brand source art
 
+> Note: the site is a holding page right now, so most of the derived assets
+> below are no longer in the tree. The recipes still work — run them when the
+> new site needs the assets back. See the root `README.md`.
+
 Raw, unprocessed inputs only. Everything the site actually imports lives in
 `src/assets/` — do not duplicate files between the two.
 
