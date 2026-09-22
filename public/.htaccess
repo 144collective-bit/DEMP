@@ -1,0 +1,5 @@
+# degenemporium.com is served by Hostinger (LiteSpeed), which falls back to its
+# own generic "This Page Does Not Exist" page unless told otherwise. Astro emits
+# 404.html; this points the server at it so every retired v1 URL lands on our
+# own 404 instead of Hostinger's.
+ErrorDocument 404 /404.html
